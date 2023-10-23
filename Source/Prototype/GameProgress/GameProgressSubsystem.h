@@ -10,16 +10,19 @@ UCLASS()
 class PROTOTYPE_API UGameProgressSubsystem : public UGameInstanceSubsystem
 {
    GENERATED_BODY()
-   
+
+public:
    virtual void Initialize(FSubsystemCollectionBase &Collection) override;
 
    virtual void Deinitialize() override;
 
    UFUNCTION(BlueprintCallable)
-   FString GetMessage() const {
-      return Message;
-   }
-   
-   FString Message = "I am the Progress!!!!";
+   void SavePointsToSubsystem(const int InPoints);
+
+   UFUNCTION(BlueprintCallable, BlueprintPure)
+   int GetLocalSavedPoints() const;
+
+private:
+   int LocalPoints;
    
 };
