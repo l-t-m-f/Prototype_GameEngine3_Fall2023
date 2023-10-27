@@ -6,6 +6,15 @@
 
 #include "GameProgressSubsystem.generated.h"
 
+UENUM(BlueprintType)
+enum class EDialogAction : uint8 {
+   ACTION_None UMETA(DisplayName="None", HIDDEN),
+   ACTION_CloseDialog UMETA(DisplayName="Close Dialog"),
+   ACTION_NextQuestLine UMETA(DisplayName="Next Quest line"),
+   ACTION_NextSlide UMETA(DisplayName="Next Slide"),
+   ACTION_MAX UMETA(HIDDEN)
+};
+
 USTRUCT(BlueprintType)
 struct FNPC_Details {
    
@@ -45,6 +54,9 @@ public:
 
    UFUNCTION(BlueprintCallable, BlueprintPure)
    FNPC_Details GetNPC_Details(const FName &InName) const;
+
+   UFUNCTION(BlueprintCallable)
+   void UpdateNPC_Details(const FName &InName, EDialogAction InAction);
 
 
 private:
