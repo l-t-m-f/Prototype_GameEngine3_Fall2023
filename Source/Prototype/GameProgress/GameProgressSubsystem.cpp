@@ -9,8 +9,8 @@ UGameProgressSubsystem::Initialize(FSubsystemCollectionBase &Collection)
    UE_LOG(LogTemp, Warning, TEXT("Progress subsystem - Initialized"));
 
    NPC_Details = TMap<FName, FNPC_Details>();
-   NPC_Details.Add(FName("Test1"), FNPC_Details(0, 0));
-   NPC_Details.Add(FName("Test2"), FNPC_Details(2, 3));
+   NPC_Details.Add(FName("Test1"), FNPC_Details(0));
+   NPC_Details.Add(FName("Test2"), FNPC_Details(2));
 }
 
 void
@@ -52,15 +52,17 @@ UGameProgressSubsystem::UpdateNPC_Details(const FName &InName,
          Details.CurrentQuestLine = Details.CurrentQuestLine + 1;
          break;
       case EDialogAction::ACTION_NextSlide:
-         Details.CurrentDialogSlide = Details.CurrentDialogSlide + 1;
+         Details.QuestLineSlideProgressArray[Details.CurrentQuestLine] += 1;
          break;
       default:;
       }
 
    UKismetSystemLibrary::PrintString(
-      this, InName.ToString() + " "
-               + FString::FromInt(Details.CurrentQuestLine) + " "
-               + FString::FromInt(Details.CurrentDialogSlide));
+      this,
+      InName.ToString() + " " + FString::FromInt(Details.CurrentQuestLine)
+         + " "
+         + FString::FromInt(
+            Details.QuestLineSlideProgressArray[Details.CurrentQuestLine]));
 
    NPC_Details.Add(InName, Details);
 }
