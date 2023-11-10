@@ -1,9 +1,9 @@
-﻿#include "GameProgressSubsystem.h"
+﻿#include "GameProgressionSubsystem.h"
 
 #include "Kismet/KismetSystemLibrary.h"
 
 void
-UGameProgressSubsystem::Initialize(FSubsystemCollectionBase &Collection)
+UGameProgressionSubsystem::Initialize(FSubsystemCollectionBase &Collection)
 {
    Super::Initialize(Collection);
    UE_LOG(LogTemp, Warning, TEXT("Progress subsystem - Initialized"));
@@ -14,32 +14,32 @@ UGameProgressSubsystem::Initialize(FSubsystemCollectionBase &Collection)
 }
 
 void
-UGameProgressSubsystem::Deinitialize()
+UGameProgressionSubsystem::Deinitialize()
 {
    Super::Deinitialize();
    UE_LOG(LogTemp, Warning, TEXT("Progress subsystem - Deinitialized"));
 }
 
 void
-UGameProgressSubsystem::SavePointsToSubsystem(const int InPoints)
+UGameProgressionSubsystem::SavePointsToSubsystem(const int InPoints)
 {
    LocalPoints = InPoints;
 }
 
 int
-UGameProgressSubsystem::GetLocalSavedPoints() const
+UGameProgressionSubsystem::GetLocalSavedPoints() const
 {
    return LocalPoints;
 }
 
 FNPC_Details
-UGameProgressSubsystem::GetNPC_Details(const FName &InName) const
+UGameProgressionSubsystem::GetNPC_Details(const FName &InName) const
 {
    return NPC_Details.FindRef(InName);
 }
 
 void
-UGameProgressSubsystem::UpdateNPC_Details(const FName &InName,
+UGameProgressionSubsystem::UpdateNPC_Details(const FName &InName,
                                           EDialogAction InAction)
 {
    FNPC_Details Details = NPC_Details.FindRef(InName);

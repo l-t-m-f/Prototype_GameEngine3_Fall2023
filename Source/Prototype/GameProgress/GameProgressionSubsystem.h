@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "GameProgressSubsystem.generated.h"
+#include "GameProgressionSubsystem.generated.h"
 
 UENUM(BlueprintType)
 enum class EDialogAction : uint8
@@ -48,9 +48,9 @@ struct FNPC_Details
    }
 };
 
-UCLASS()
+UCLASS(Config=GameProgress)
 
-class PROTOTYPE_API UGameProgressSubsystem : public UGameInstanceSubsystem
+class PROTOTYPE_API UGameProgressionSubsystem : public UGameInstanceSubsystem
 {
    GENERATED_BODY()
 
@@ -93,4 +93,10 @@ private:
    TMap<FName, FNPC_Details> NPC_Details;
 
    int LocalPoints;
+
+   UPROPERTY(Config)
+   int ConfigTest;
+
+   UPROPERTY(Config)
+   FVector ConfigVector;
 };
